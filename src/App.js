@@ -5,14 +5,25 @@ import CardList from './CardList';
 import { useState } from 'react';
 import ExecutePassButton from './ExecutePassButton';
 
+import { useGameContext } from './GameProvider';
+
 function App() {
-  const [deck, setDeck] = useState(initialCards);
-  const [playerOneHand, setPlayerOneHand] = useState([]);
-  const [selectedCard, setSelectedCard] = useState();
-  const [playerTwoHand, setPlayerTwoHand] = useState([]);
-  const [playerThreeHand, setPlayerThreeHand] = useState([]);
-  const [from, setFrom] = useState('deck');
-  const [to, setTo] = useState(1);
+  // const [deck, setDeck] = useState(initialCards);
+  // const [playerOneHand, setPlayerOneHand] = useState([]);
+  // const [selectedCard, setSelectedCard] = useState();
+  // const [playerTwoHand, setPlayerTwoHand] = useState([]);
+  // const [playerThreeHand, setPlayerThreeHand] = useState([]);
+  // const [from, setFrom] = useState('deck');
+  // const [to, setTo] = useState(1);
+  const {
+    deck, setDeck,
+    playerOneHand, setPlayerOneHand,
+    selectedCard, setSelectedCard,
+    playerTwoHand, setPlayerTwoHand,
+    playerThreeHand, setPlayerThreeHand,
+    from, setFrom,
+    to, setTo
+  } = useGameContext();
 
   function findCardIndex(value, suit, cards) {
     return cards.findIndex(card => card.value === value && card.suit === suit);
@@ -47,7 +58,7 @@ function App() {
         <Player to={to} player={1} hand={playerOneHand} setFrom={setFrom} selectedCard={selectedCard} setTo={setTo} setSelectedCard={setSelectedCard} />
         <Player to={to} player={2} hand={playerTwoHand} setFrom={setFrom} selectedCard={selectedCard} setTo={setTo} setSelectedCard={setSelectedCard} />
         <Player to={to} player={3} hand={playerThreeHand} setFrom={setFrom} selectedCard={selectedCard} setTo={setTo} setSelectedCard={setSelectedCard} />
-        <CardList cards={deck} selectedCard={selectedCard} setSelectedCard={setSelectedCard} setFrom={setFrom} player={'deck'} />
+        <CardList cards={deck} player={'deck'} />
       </section>
       <section>
         {
